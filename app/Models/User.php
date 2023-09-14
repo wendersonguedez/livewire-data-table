@@ -42,4 +42,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Query para pesquisar usuário pelo nome ou email
+     * 
+     */
+    public function scopeSearch($query, $value)
+    {
+        $query->where('name', 'like', "%{$value}%")->orWhere('email', 'like', "%{$value}%");
+    }
 }
