@@ -15,11 +15,17 @@ class UsersTable extends Component
 
     public $admin = '';
 
+    public function delete(User $user)
+    {
+        $user->delete();
+    }
+
     public function render()
     {
         $users = User::search($this->search)
+            // when() fica responsavel por adicionar determinada clasula à uma consulta, somente se a condição passada como 1º parâmetro for true.
+            // neste caso, somente se a variavel $this->admin não for uma string vazia. se for vazia, irá retornar todos os tipos de usuário (admin e usuário comum).
             ->when($this->admin !== '', function ($query) {
-                // /* se $this->$admin for uma string vazia, não será feita uma pesquisa, então mostrará todos os usuários */
                 $query->where('is_admin', $this->admin);
             })
             ->paginate($this->perPage);
