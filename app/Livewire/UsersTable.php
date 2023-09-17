@@ -17,14 +17,13 @@ class UsersTable extends Component
 
     public function render()
     {
-        return view('livewire.users-table', [
-            'users' => User::search($this->search)
-                /* se $this->$admin for uma string vazia, não será feita uma pesquisa, então mostrará todos os usuários */
-                ->when($this->admin !== '', function ($query) {
-                    dd("entrou");
-                    $query->where('is_admin', $this->admin);
-                })
-                ->paginate($this->perPage),
-        ]);
+        $users = User::search($this->search)
+            ->when($this->admin !== '', function ($query) {
+                // /* se $this->$admin for uma string vazia, não será feita uma pesquisa, então mostrará todos os usuários */
+                $query->where('is_admin', $this->admin);
+            })
+            ->paginate($this->perPage);
+
+        return view('livewire.users-table', compact('users'));
     }
 }

@@ -1,4 +1,6 @@
 <div>
+    {{-- @dd($users->toArray()['data']) --}}
+
     <div>
         <section class="mt-10">
             <div class="mx-auto max-w-screen-xl px-4 lg:px-12">
@@ -15,7 +17,7 @@
                                             clip-rule="evenodd" />
                                     </svg>
                                 </div>
-                                <!-- ao usar wire:model.live, toda vez que digitarmos, será feita uma request para o servidor, oq pode deixa-lo lento, devido a 
+                                <!-- ao usar wire:model.live, toda vez que digitarmos, será feita uma request para o servidor, oq pode deixa-lo lento, devido a
                                     quantidade de requests. debounce.300ms basicamente enviará a request 300ms depois que pararmos de digitar -->
                                 <input wire:model.live.debounce.300ms='search' type="text"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 "
@@ -25,8 +27,7 @@
                         <div class="flex space-x-3">
                             <div class="flex space-x-3 items-center">
                                 <label class="w-40 text-sm font-medium text-gray-900">User Type :</label>
-                                <select
-                                    wire:model.live='admin'
+                                <select wire:model.live='admin'
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                                     <option value="">All</option>
                                     <option value="0">User</option>
